@@ -97,6 +97,29 @@ exports.addBookmark = catchAsync(async (req, res, next) => {
 exports.removeBookmark = catchAsync(async (req, res, next) => {
   if (!req.params.recipeId)
     return next(new AppError('Please provide a recipe ID to bookmark'));
+
+  const bookmarkDoesntExists = !req.user.bookmarks.some(bookmarkId =>
+    bookmarkId.equals(req.params.recipeId)
+  );
+
+  if (bookmarkDoesntExists)
+    return res.status(200).json({
+      status: 'success',
+      data: {
+        user: req.user,
+      },
+    });
+
+  // TODO
+  // Delete bookmark from DB
+  let updatedUser; // initialise this
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
