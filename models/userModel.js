@@ -66,6 +66,14 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
     daysUntilDeletion: { type: Number, select: false },
+    bookmarks: {
+      type: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'Recipe',
+        },
+      ],
+    },
   },
   {
     toJSON: {

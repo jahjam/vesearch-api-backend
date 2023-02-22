@@ -61,6 +61,24 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.addBookmark = catchAsync(async (req, res, next) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    { $push: { bookmarks: req.params.recipeId } },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
 exports.deleteMe = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 

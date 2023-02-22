@@ -2,6 +2,7 @@ const express = require('express');
 const {
   getMe,
   updateMe,
+  addBookmark,
   deleteMe,
   getAllUsers,
   createUser,
@@ -41,6 +42,8 @@ router
   .get(getMe)
   .patch(uploadUserPhoto, resizeUserPhoto, updateMe)
   .delete(deleteMe);
+
+router.route('/addBookmark/:recipeId').patch(addBookmark);
 
 // Restricted to ADMIN
 router.use(restrictTo('admin'));

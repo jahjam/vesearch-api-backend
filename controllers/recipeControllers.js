@@ -130,6 +130,8 @@ exports.addRecipe = catchAsync(async (req, res, next) => {
   req.body.nutritionProvided = JSON.parse(req.body.nutritionProvided);
   req.body.methodsProvided = JSON.parse(req.body.methodsProvided);
 
+  // BUG
+  // remove this before production
   req.body.isApproved = true;
 
   if (req.file) {
