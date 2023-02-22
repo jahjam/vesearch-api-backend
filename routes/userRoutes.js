@@ -3,6 +3,7 @@ const {
   getMe,
   updateMe,
   addBookmark,
+  removeBookmark,
   deleteMe,
   getAllUsers,
   createUser,
@@ -44,6 +45,7 @@ router
   .delete(deleteMe);
 
 router.route('/addBookmark/:recipeId').patch(addBookmark);
+router.route('/removeBookmark/:recipeId').patch(removeBookmark);
 
 // Restricted to ADMIN
 router.use(restrictTo('admin'));

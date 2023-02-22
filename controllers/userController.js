@@ -62,6 +62,21 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.addBookmark = catchAsync(async (req, res, next) => {
+  if (!req.params.recipeId)
+    return next(new AppError('Please provide a recipe ID to bookmark'));
+
+  const bookmarkExists = req.user.bookmarks.some(bookmarkId =>
+    bookmarkId.equals(req.params.recipeId)
+  );
+
+  if (bookmarkExists)
+    return res.status(200).json({
+      status: 'success',
+      data: {
+        user: req.user,
+      },
+    });
+
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
     { $push: { bookmarks: req.params.recipeId } },
@@ -77,6 +92,11 @@ exports.addBookmark = catchAsync(async (req, res, next) => {
       user: updatedUser,
     },
   });
+});
+
+exports.removeBookmark = catchAsync(async (req, res, next) => {
+  if (!req.params.recipeId)
+    return next(new AppError('Please provide a recipe ID to bookmark'));
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
