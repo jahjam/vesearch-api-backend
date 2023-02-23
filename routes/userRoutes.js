@@ -45,7 +45,7 @@ router
   .delete(deleteMe);
 
 router.route('/addBookmark/:recipeId').patch(addBookmark);
-router.route('/removeBookmark/:recipeId').patch(removeBookmark);
+router.route('/removeBookmark/:recipeId').delete(removeBookmark);
 
 // Restricted to ADMIN
 router.use(restrictTo('admin'));

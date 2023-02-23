@@ -1,4 +1,5 @@
 const schedule = require('node-schedule');
+const mongoose = require('mongoose');
 const multer = require('multer');
 const sharp = require('sharp');
 const { add } = require('date-fns');
@@ -110,9 +111,16 @@ exports.removeBookmark = catchAsync(async (req, res, next) => {
       },
     });
 
-  // TODO
-  // Delete bookmark from DB
-  let updatedUser; // initialise this
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      $pull: { bookmarks: mongoose.Types.ObjectId(req.params.recipeId) },
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   res.status(200).json({
     status: 'success',
