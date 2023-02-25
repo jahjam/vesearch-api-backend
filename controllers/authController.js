@@ -56,7 +56,8 @@ exports.whoAmI = async (req, res, next) => {
 
   const validatedUser = await User.findById(decodedJWT.id)
     .select('+passwordChangedAt')
-    .populate('recipes');
+    .populate('recipes')
+    .populate('bookmarks');
 
   if (!validatedUser)
     return next(new AppError('This user cannot be found.', 401));
