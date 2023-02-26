@@ -87,7 +87,7 @@ exports.addBookmark = catchAsync(async (req, res, next) => {
       new: true,
       runValidators: true,
     }
-  );
+  ).populate('bookmarks');
 
   res.status(200).json({
     status: 'success',
@@ -122,7 +122,7 @@ exports.removeBookmark = catchAsync(async (req, res, next) => {
       new: true,
       runValidators: true,
     }
-  );
+  ).populate('bookmarks');
 
   res.status(200).json({
     status: 'success',

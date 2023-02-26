@@ -59,6 +59,8 @@ exports.whoAmI = async (req, res, next) => {
     .populate('recipes')
     .populate('bookmarks');
 
+  console.log(validatedUser);
+
   if (!validatedUser)
     return next(new AppError('This user cannot be found.', 401));
 
