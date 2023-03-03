@@ -71,6 +71,16 @@ exports.whoAmI = async (req, res, next) => {
 };
 
 exports.signUp = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: decipheredEmail(req.body.email) });
+
+  if (user)
+    return next(
+      new AppError(
+        'This email has already been registered with us, please use another!',
+        409
+      )
+    );
+
   const newUser = await User.create({
     email: req.body.email,
     joinDate: Date.now(),
@@ -79,7 +89,22 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordConfirmation: req.body.passwordConfirmation,
   });
 
-  createAndSendJWT(newUser, 200, req, res);
+  try {
+    const signUpURL = `${req.protocol}://${req.get('host')}`;
+
+    await new Email(newUser, signUpURL).sendWelcome();
+
+    createAndSendJWT(newUser, 200, req, res);
+  } catch (err) {
+    createAndSendJWT(newUser, 200, req, res);
+
+    return next(
+      new AppError(
+        'There was an error sending your welcome message email.',
+        500
+      )
+    );
+  }
 });
 
 exports.logIn = catchAsync(async (req, res, next) => {

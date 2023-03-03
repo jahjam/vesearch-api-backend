@@ -38,7 +38,11 @@ app.use(cors());
 app.options('*', cors());
 
 // sets some blanket security headers (is a wrapper for many smaller middlewares)
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 
 // middleware
 // only use morgan logger in development environment
@@ -79,6 +83,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/public', express.static(`${__dirname}/public`));
+app.use('/views', express.static(`${__dirname}/views`));
 
 // app generic routes
 app.use(`/api/v${process.env.API_VERSION}/recipes`, recipeRoute);
