@@ -93,16 +93,12 @@ schedule.scheduleJob('*/1 * * * *', async () => {
     },
   });
 
-  console.log(usersForDeletion);
-
   if (!usersForDeletion.length) return;
 
   for (const user of usersForDeletion) {
     const foundUser = await User.findById(user.id).populate(
       'daysUntilDeletion'
     );
-
-    console.log(foundUser);
 
     foundUser.daysUntilDeletion--;
     await foundUser.save({ validateBeforeSave: false });

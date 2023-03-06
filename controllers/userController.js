@@ -142,19 +142,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   user.daysUntilDeletion = 4;
   await user.save({ validateBeforeSave: false });
 
-  // schedule.scheduleJob('*/1 * * * *', async () => {
-  //   user.daysUntilDeletion--;
-  //   await user.save({ validateBeforeSave: false });
-  // });
-
-  // // BUG!!!!!!!!!!!!!!!!!
-  // const deletionJob = schedule.scheduleJob(deletionDate, () => {
-  //   return User.deleteMany({ daysUntilDeletion: { $lte: 0 } }, err => {
-  //     if (err) return console.log('Error while erasing users ' + err);
-  //     console.log('successfully erased data');
-  //   });
-  // });
-
   res.status(200).json({
     status: 'success',
     message: `User will be deleted in ${user.daysUntilDeletion} days. If you change your mind, please log in again to cancel this process. After 14 days your account will be deleted for good.`,
