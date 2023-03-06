@@ -1,4 +1,3 @@
-const schedule = require('node-schedule');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const sharp = require('sharp');
@@ -137,26 +136,24 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 
   const dateScheduled = Date.now();
 
-  const deletionDate = add(dateScheduled, { days: 14 });
+  const deletionDate = add(dateScheduled, { minutes: 1 });
 
   user.flaggedForDeletion = true;
-  user.daysUntilDeletion = process.env.DAYS_UNTIL_DELETION;
+  user.daysUntilDeletion = 4;
   await user.save({ validateBeforeSave: false });
 
-  schedule.scheduleJob('* */24 * * *', async () => {
-    // activates immdediately upon initialisation of job, so add a day on to keep it at 14 days from the day job is scheduled not 13.
-    user.daysUntilDeletion++;
-    user.daysUntilDeletion--;
-    await user.save({ validateBeforeSave: false });
-  });
+  // schedule.scheduleJob('*/1 * * * *', async () => {
+  //   user.daysUntilDeletion--;
+  //   await user.save({ validateBeforeSave: false });
+  // });
 
-  const deletionJob = schedule.scheduleJob(deletionDate, async () => {
-    await User.findByIdAndDelete(user._id);
-  });
-
-  deletionJob.on('canceled', () => {
-    // send deletion confirmation email
-  });
+  // // BUG!!!!!!!!!!!!!!!!!
+  // const deletionJob = schedule.scheduleJob(deletionDate, () => {
+  //   return User.deleteMany({ daysUntilDeletion: { $lte: 0 } }, err => {
+  //     if (err) return console.log('Error while erasing users ' + err);
+  //     console.log('successfully erased data');
+  //   });
+  // });
 
   res.status(200).json({
     status: 'success',

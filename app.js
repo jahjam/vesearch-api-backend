@@ -26,6 +26,10 @@ const app = express();
 const recipeRoute = require('./routes/recipeRoutes');
 // import the router for users
 const userRoute = require('./routes/userRoutes');
+
+const schedule = require('node-schedule');
+
+const User = require('./models/userModel');
 // import the router for reviews
 const reviewRoute = require('./routes/reviewRoutes');
 // import custom error middleware
@@ -80,6 +84,34 @@ app.use(compression());
 app.use((req, res, next) => {
   req.timeOfRequest = dateFns.format(new Date(), 'dd/MM/yyyy hh:mm:ssa OOOO');
   next();
+});
+
+schedule.scheduleJob('*/1 * * * *', async () => {
+  const usersForDeletion = await User.find({
+    daysUntilDeletion: {
+      $exists: true,
+    },
+  });
+
+  console.log(usersForDeletion);
+
+  if (!usersForDeletion.length) return;
+
+  for (const user of usersForDeletion) {
+    const foundUser = await User.findById(user.id).populate(
+      'daysUntilDeletion'
+    );
+
+    console.log(foundUser);
+
+    foundUser.daysUntilDeletion--;
+    await foundUser.save({ validateBeforeSave: false });
+  }
+
+  User.deleteMany({ daysUntilDeletion: { $lte: 0 } }, err => {
+    if (err) return new AppError('Error while erasing users', 500);
+    console.log('successfully deleted user data');
+  });
 });
 
 app.use('/public', express.static(`${__dirname}/public`));
