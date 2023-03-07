@@ -86,7 +86,7 @@ app.use((req, res, next) => {
   next();
 });
 
-schedule.scheduleJob('*/1 * * * *', async () => {
+schedule.scheduleJob('* */24 * * *', async () => {
   const usersForDeletion = await User.find({
     daysUntilDeletion: {
       $exists: true,
