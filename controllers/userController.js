@@ -134,12 +134,8 @@ exports.removeBookmark = catchAsync(async (req, res, next) => {
 exports.deleteMe = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
-  const dateScheduled = Date.now();
-
-  const deletionDate = add(dateScheduled, { minutes: 1 });
-
   user.flaggedForDeletion = true;
-  user.daysUntilDeletion = 4;
+  user.daysUntilDeletion = process.env.DAYS_UNTIL_DELETION;
   await user.save({ validateBeforeSave: false });
 
   res.status(200).json({
