@@ -50,4 +50,8 @@ module.exports = class Email {
   async sendWelcome() {
     await this.send('welcomeMessage', 'Welcome, from the VESearch Team!');
   }
+
+  async sendGoodbye() {
+    await this.send('deletionMessage', "Sorry to see you're leaving us!");
+  }
 };
