@@ -138,10 +138,21 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   user.daysUntilDeletion = process.env.DAYS_UNTIL_DELETION;
   await user.save({ validateBeforeSave: false });
 
-  res.status(200).json({
-    status: 'success',
-    message: `User will be deleted in ${user.daysUntilDeletion} days. If you change your mind, please log in again to cancel this process. After 14 days your account will be deleted for good.`,
-  });
+  try {
+    await new Email(newUser, signUpURL).sendGoodbye();
+
+    res.status(200).json({
+      status: 'success',
+      message: `User will be deleted in ${user.daysUntilDeletion} days. If you change your mind, please log in again to cancel this process. After 14 days your account will be deleted for good.`,
+    });
+  } catch (err) {
+    return next(
+      new AppError(
+        'There was an error sending your welcome message email.',
+        500
+      )
+    );
+  }
 });
 
 exports.getAllUsers = () => {};
