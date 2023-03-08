@@ -2,6 +2,8 @@
 const xss = require('xss-clean');
 // allow requests
 const cors = require('cors');
+// simple scheduler for node
+const schedule = require('node-schedule');
 // mongoSanitize removes mongo operators from request body to prevent code injection
 const mongoSanitize = require('express-mongo-sanitize');
 // import rate limit to prevent against brute force attacks
@@ -26,9 +28,7 @@ const app = express();
 const recipeRoute = require('./routes/recipeRoutes');
 // import the router for users
 const userRoute = require('./routes/userRoutes');
-
-const schedule = require('node-schedule');
-
+// import user model
 const User = require('./models/userModel');
 // import the router for reviews
 const reviewRoute = require('./routes/reviewRoutes');
@@ -87,6 +87,12 @@ app.use((req, res, next) => {
 });
 
 schedule.scheduleJob('* */24 * * *', async () => {
+  const deletionData = await User.deleteMany({
+    daysUntilDeletion: { $lte: 0 },
+  });
+
+  console.log('Number of users deleted today:', deletionData.deletedCount);
+
   const usersForDeletion = await User.find({
     daysUntilDeletion: {
       $exists: true,
@@ -95,18 +101,13 @@ schedule.scheduleJob('* */24 * * *', async () => {
 
   if (!usersForDeletion.length) return;
 
-  for (const user of usersForDeletion) {
+  usersForDeletion.forEach(async user => {
     const foundUser = await User.findById(user.id).populate(
       'daysUntilDeletion'
     );
 
     foundUser.daysUntilDeletion--;
     await foundUser.save({ validateBeforeSave: false });
-  }
-
-  User.deleteMany({ daysUntilDeletion: { $lte: 0 } }, err => {
-    if (err) return new AppError('Error while erasing users', 500);
-    console.log('successfully deleted user data');
   });
 });
 
