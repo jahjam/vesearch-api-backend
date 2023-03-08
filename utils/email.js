@@ -52,6 +52,9 @@ module.exports = class Email {
   }
 
   async sendGoodbye() {
-    await this.send('deletionMessage', "Sorry to see you're leaving us!");
+    await this.send(
+      'deletionMessage',
+      "We're very sorry to see you're leaving us!"
+    );
   }
 };
