@@ -127,9 +127,15 @@ exports.logIn = catchAsync(async (req, res, next) => {
       new AppError('Incorrect email or password, please try again!', 401)
     );
 
+  // Reset user no longer for deletion if they were set
   if (user.flaggedForDeletion) {
     user.flaggedForDeletion = false;
-    user.daysUntilDeletion = undefined;
+
+    await User.updateOne(
+      { _id: user.id },
+      { $unset: { daysUntilDeletion: '' } }
+    );
+
     await user.save({ validateBeforeSave: false });
   }
 
