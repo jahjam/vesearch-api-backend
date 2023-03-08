@@ -587,7 +587,7 @@ module.exports = class Template {
                 <br />
                 From today, you'll have 14 days to sign back into your account to
                 reactivate it. After 14 days, if you haven't signed back in, your
-                account will be deleted, however, all your ryummy recipes will
+                account will be deleted, however, all your  yummy recipes will
                 remain for everyone to view. If, for some reason, you also wish for
                 all your recipes to be removed, please email hello(at)VESearch.com,
                 to request this.
