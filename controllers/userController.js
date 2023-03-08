@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
 const sharp = require('sharp');
-const { add } = require('date-fns');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const { multerFilter } = require('../utils/multerFilter');
+const Email = require('../utils/email');
 
 const multerStorage = multer.memoryStorage();
 
@@ -139,7 +139,8 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    await new Email(newUser, signUpURL).sendGoodbye();
+    const deletionURL = `${req.protocol}://${req.get('host')}`;
+    await new Email(user, deletionURL).sendGoodbye();
 
     res.status(200).json({
       status: 'success',
@@ -148,7 +149,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   } catch (err) {
     return next(
       new AppError(
-        'There was an error sending your welcome message email.',
+        'There was an error sending your account deletion confirmation email.',
         500
       )
     );
