@@ -117,7 +117,8 @@ exports.logIn = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email: decipheredEmail(email) })
     .select('+password +flaggedForDeletion')
-    .populate('recipes');
+    .populate('recipes')
+    .populate('bookmarks');
 
   const passwordValidation = async () =>
     await bcrypt.compare(password, user.password);
@@ -242,7 +243,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  console.log(req.params.jwt);
   // this should create an identical token to the one created for the user when the token was request, if token is not identical, it's not the correct token.
   const hashedToken = crypto
     .createHash('sha256')
@@ -253,8 +253,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passwordResetToken: hashedToken,
     passwordResetExpiryDate: { $gt: Date.now() },
   });
-
-  console.log(user);
 
   if (!user)
     return next(new AppError('Reset link is invalid or has expired', 400));
