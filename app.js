@@ -22,8 +22,6 @@ const dateFns = require('date-fns');
 const morgan = require('morgan');
 // import express on top of node.js
 const express = require('express');
-// establish express with 'app'
-const app = express();
 // import the router for recipes
 const recipeRoute = require('./routes/recipeRoutes');
 // import the router for users
@@ -36,6 +34,9 @@ const reviewRoute = require('./routes/reviewRoutes');
 const globalErrorMiddleware = require('./middleware/errorMiddleware');
 // import custom error object
 const AppError = require('./utils/appError');
+
+// establish express with 'app'
+const app = express();
 
 app.use(cors());
 
