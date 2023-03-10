@@ -156,6 +156,8 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   }
 });
 
+// TODO
+// Add an admin page to manage users in app
 exports.getAllUsers = () => {};
 exports.getUser = () => {};
 exports.createUser = () => {};
