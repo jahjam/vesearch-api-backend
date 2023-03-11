@@ -92,6 +92,8 @@ schedule.scheduleJob('* */24 * * *', async () => {
     daysUntilDeletion: { $lte: 0 },
   });
 
+  console.log(Date.now());
+
   console.log('Number of users deleted today:', deletionData.deletedCount);
 
   const usersForDeletion = await User.find({
