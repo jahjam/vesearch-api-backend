@@ -106,5 +106,4 @@ app.all('*', (req, res, next) =>
 // this will capture all errors so that we can handle them appropriately
 app.use(globalErrorMiddleware);
 
-// export app for use in server
 module.exports = app;
