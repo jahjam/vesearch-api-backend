@@ -63,7 +63,7 @@ app.use((req, res, next) => {
   next();
 });
 
-schedule.scheduleJob('* */24 * * *', async () => {
+schedule.scheduleJob('* * */24 * *', async () => {
   const deletionData = await User.deleteMany({
     daysUntilDeletion: { $lte: 0 },
   });
