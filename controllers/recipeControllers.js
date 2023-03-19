@@ -190,7 +190,6 @@ exports.editRecipe = catchAsync(async (req, res, next) => {
 exports.deleteRecipe = catchAsync(async (req, res, next) => {
   const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id);
 
-  // if an error is thrown because there is no database entry with the reuqest Id, deletedRecipe will be undefined and therefore we can throw a new error
   if (!deletedRecipe) {
     return next(
       new AppError(`No tour found with that ID: ${req.params.id}`),
@@ -198,7 +197,6 @@ exports.deleteRecipe = catchAsync(async (req, res, next) => {
     );
   }
 
-  // no point sending json with this respose as 204 means no content
   res.status(204).send();
 });
 
