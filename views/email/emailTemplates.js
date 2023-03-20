@@ -164,7 +164,9 @@ module.exports = class Template {
           <header class="header">
             <img
               class="img-header"
-              src="./templates/imgs/vesearch-logo.png"
+              src="${
+                this.options.url.split('/new')[0]
+              }/views/email/templates/imgs/vesearch-logo.png"
               height="120px"
               alt="VESearch logo"
             />
@@ -174,10 +176,14 @@ module.exports = class Template {
             <div class="main-body">
               <h1 class="title">Your Password Reset Link Has Arrived!</h1>
               <p class="main-body-para">
-                Hey, ${this.options.username}! Please find below your password reset link:
+                Hey, ${
+                  this.options.username
+                }! Please find below your password reset link:
               </p>
               <button class="main-body-link">
-                <a class="button-link" href="${this.options.url}">Reset Password</a>
+                <a class="button-link" href="${
+                  this.options.url
+                }">Reset Password</a>
               </button>
               <p class="main-body-para">
                 If you didn't request this link, please simply ignore it.
@@ -188,7 +194,9 @@ module.exports = class Template {
           <footer class="footer">
             <img
               class="img-footer"
-              src="./templates/imgs/vesearch-logo.png"
+              src="${
+                this.options.url.split('/new')[0]
+              }/views/email/templates/imgs/vesearch-logo.png"
               height="100px"
               alt="VESearch logo"
             />
