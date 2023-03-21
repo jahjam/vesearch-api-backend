@@ -37,14 +37,12 @@ const sendDevelopmentError = (err, res) => {
 };
 
 const sendProductionError = (err, res) => {
-  // operational, trusted error that we have purposefully thrown in our code (created within the error object)
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,
     });
   } else {
-    // this error will be sent during production if there is a bug in our code or in an included library so not to leak any potentially senstive code to the client
     res.status(500).json({
       status: 'error',
       message: 'Oops, something went wrong!',
