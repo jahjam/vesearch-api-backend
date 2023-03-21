@@ -35,7 +35,6 @@ exports.setAuthor = (req, res, next) => {
 };
 
 exports.getAllApprovedRecipes = catchAsync(async (req, res) => {
-  // find is used to return all the available recipes in the DB
   const queries = new QueryFeatures(Recipe.find(), req.query)
     .filter()
     .sort()
@@ -44,7 +43,6 @@ exports.getAllApprovedRecipes = catchAsync(async (req, res) => {
 
   const recipes = await queries.query;
 
-  // only show approved recipes
   const approvedRecipes = recipes.filter(recipe => recipe.isApproved);
 
   res.status(200).json({
@@ -60,7 +58,6 @@ exports.getAllApprovedRecipes = catchAsync(async (req, res) => {
 exports.getAllUnapprovedRecipes = catchAsync(async (req, res) => {
   const recipes = await Recipe.find();
 
-  // only show unapproved recipes
   const unapprovedRecipes = recipes.filter(recipe => !recipe.isApproved);
 
   res.status(200).json({
@@ -104,7 +101,6 @@ exports.rejectRecipe = catchAsync(async (req, res, next) => {
 });
 
 exports.getOneApprovedRecipe = catchAsync(async (req, res) => {
-  // findById is used to find the recipe by a given ID
   const recipe = await Recipe.findById(req.params.id);
 
   res.status(200).json({
@@ -148,7 +144,6 @@ exports.addRecipe = catchAsync(async (req, res, next) => {
     delete req.body.methods;
   }
 
-  // used create on the recipe object to store req in mongoDB
   const newRecipe = await Recipe.create(req.body);
 
   res.status(201).json({
@@ -172,9 +167,7 @@ exports.editRecipe = catchAsync(async (req, res, next) => {
     req.params.id,
     req.body,
     {
-      // returns the newly edited document
       new: true,
-      // applied the validators to the updated fields
       runValidators: true,
     }
   );
