@@ -7,10 +7,24 @@ module.exports = class Email {
     this.to = user.email;
     this.username = user.username;
     this.url = url;
-    this.from = `VESearch <${process.env.EMAIL}>`;
+    this.from =
+      process.env.NODE_ENV === 'production'
+        ? `VESearch <${process.env.PRODUCTION_EMAIL}>`
+        : `VESearch <${process.env.EMAIL}>`;
   }
 
   transporter() {
+    if (process.env.NODE_ENV === 'production') {
+      return nodemailer.createTransport({
+        service: 'Hotmail',
+        auth: {
+          type: 'login',
+          user: process.env.PRODUCTION_EMAIL,
+          pass: process.env.PRODUCTION_EMAIL_PASSWORD,
+        },
+      });
+    }
+
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
@@ -48,7 +62,7 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('welcomeMessage', 'Welcome, from the VESearch Team!');
+    await this.send('welcomeMessage', 'Welcome, from the VESearch!');
   }
 
   async sendGoodbye() {
