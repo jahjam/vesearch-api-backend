@@ -81,28 +81,25 @@ exports.signUp = catchAsync(async (req, res, next) => {
       )
     );
 
-  const newUser = await User.create({
+  const newUser = {
     email: req.body.email,
     joinDate: Date.now(),
     username: req.body.username,
     password: req.body.password,
     passwordConfirmation: req.body.passwordConfirmation,
-  });
+  };
 
   try {
     const signUpURL = `${req.protocol}://${req.get('host')}`;
 
     await new Email(newUser, signUpURL).sendWelcome();
 
-    createAndSendJWT(newUser, 200, req, res);
-  } catch (err) {
-    createAndSendJWT(newUser, 200, req, res);
+    const newCreatedUser = await User.create(newUser);
 
+    createAndSendJWT(newCreatedUser, 200, req, res);
+  } catch (err) {
     return next(
-      new AppError(
-        'There was an error sending your welcome message email.',
-        500
-      )
+      new AppError('There was an error signing you up, please try again.', 500)
     );
   }
 });
