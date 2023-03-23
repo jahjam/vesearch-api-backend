@@ -57,20 +57,18 @@ app.use(
 
 app.use(compression());
 
-// create a time of request property on the request object
 app.use((req, res, next) => {
   req.timeOfRequest = dateFns.format(new Date(), 'dd/MM/yyyy hh:mm:ssa OOOO');
   next();
 });
 
 schedule.scheduleJob('* * */24 * *', async () => {
-  const deletionData = await User.deleteMany({
+  await User.deleteMany({
     daysUntilDeletion: { $lte: 0 },
   });
 
   // TODO
   // Make a logger
-  console.log('Number of users deleted today:', deletionData.deletedCount);
 
   const usersForDeletion = await User.find({
     daysUntilDeletion: {
@@ -98,12 +96,10 @@ app.use(`/api/v${process.env.API_VERSION}/recipes`, recipeRoute);
 app.use(`/api/v${process.env.API_VERSION}/users`, userRoute);
 app.use(`/api/v${process.env.API_VERSION}/reviews`, reviewRoute);
 
-// blanket captrue of not found urls
 app.all('*', (req, res, next) =>
   next(new AppError(`${req.originalUrl} is not available on this server`, 404))
 );
 
-// this will capture all errors so that we can handle them appropriately
 app.use(globalErrorMiddleware);
 
 module.exports = app;
