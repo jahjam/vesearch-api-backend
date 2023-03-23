@@ -3,9 +3,9 @@ class AppError extends Error {
     super(message);
 
     this.statusCode = statusCode;
-    // set the status depending on what code is passed in
+
     this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
-    // create an isOperational property to determine if error is thrown by us
+
     this.isOperational = true;
 
     // use Error.captureStackTrace to clean the stack trace which allows for easier debugging
