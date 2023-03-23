@@ -166,7 +166,7 @@ module.exports = class Template {
               class="img-header"
               src="${
                 this.options.url.split('/new')[0]
-              }/views/email/templates/imgs/vesearch-logo.png"
+              }/public/emailImgs/vesearch-logo.png"
               height="120px"
               alt="VESearch logo"
             />
@@ -196,7 +196,7 @@ module.exports = class Template {
               class="img-footer"
               src="${
                 this.options.url.split('/new')[0]
-              }/views/email/templates/imgs/vesearch-logo.png"
+              }/public/emailImgs/vesearch-logo.png"
               height="100px"
               alt="VESearch logo"
             />
@@ -371,7 +371,7 @@ module.exports = class Template {
       <body>
         <div class="container">
           <header class="header">
-            <img class="img-header" src="${this.options.url}/views/email/templates/imgs/vesearch-logo.png" alt="VESearch logo" height="120px" />
+            <img class="img-header" src="${this.options.url}/public/emailImgs/vesearch-logo.png" alt="VESearch logo" height="120px" />
           </header>
     
           <main class="main">
@@ -385,17 +385,17 @@ module.exports = class Template {
               </p>
               <img
                 class="leaf-icon"
-                src="${this.options.url}/views/email/templates/imgs/leaf-icon.svg"
+                src="${this.options.url}/public/emailImgs/leaf-icon.svg"
                 alt="leaf icon svg"
               />
               <img
                 class="leaf-icon"
-                src="${this.options.url}/views/email/templates/imgs/leaf-icon.svg"
+                src="${this.options.url}/public/emailImgs/leaf-icon.svg"
                 alt="leaf icon svg"
               />
               <img
                 class="leaf-icon"
-                src="${this.options.url}/views/email/templates/imgs/leaf-icon.svg"
+                src="${this.options.url}/public/emailImgs/leaf-icon.svg"
                 alt="leaf icon svg"
               />
               <p class="main-body-para">
@@ -413,7 +413,7 @@ module.exports = class Template {
           </main>
     
           <footer class="footer">
-            <img class="img-footer" src="${this.options.url}/views/email/templates/imgs/vesearch-logo.png" alt="VESearch logo" height="100px" />
+            <img class="img-footer" src="${this.options.url}/public/emailImgs/vesearch-logo.png" alt="VESearch logo" height="100px" />
             <a class="footer-link" href="https://www.jameskevinwoodruff.com"
               >By Atomic Mammoth Media</a
             >
@@ -583,7 +583,7 @@ module.exports = class Template {
       <body>
         <div class="container">
           <header class="header">
-            <img class="img-header" src="${this.options.url}/views/email/templates/imgs/vesearch-logo.png" height="120px" />
+            <img class="img-header" src="${this.options.url}/public/emailImgs/vesearch-logo.png" height="120px" />
           </header>
     
           <main class="main">
@@ -602,17 +602,17 @@ module.exports = class Template {
               </p>
               <img
                 class="leaf-icon"
-                src="${this.options.url}/views/email/templates/imgs/leaf-icon.svg"
+                src="${this.options.url}/public/emailImgs/leaf-icon.svg"
                 alt="leaf icon svg"
               />
               <img
                 class="leaf-icon"
-                src="${this.options.url}/views/email/templates/imgs/leaf-icon.svg"
+                src="${this.options.url}/public/emailImgs/leaf-icon.svg"
                 alt="leaf icon svg"
               />
               <img
                 class="leaf-icon"
-                src="${this.options.url}/views/email/templates/imgs/leaf-icon.svg"
+                src="${this.options.url}/public/emailImgs/leaf-icon.svg"
                 alt="leaf icon svg"
               />
               <p class="main-body-para">
@@ -628,7 +628,7 @@ module.exports = class Template {
           </main>
     
           <footer class="footer">
-            <img class="img-footer" src="${this.options.url}/views/email/templates/imgs/vesearch-logo.png" height="100px" />
+            <img class="img-footer" src="${this.options.url}/public/emailImgs/vesearch-logo.png" height="100px" />
             <a class="footer-link" href="https://www.jameskevinwoodruff.com"
               >By Atomic Mammoth Media</a
             >
