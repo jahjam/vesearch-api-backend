@@ -6,15 +6,10 @@ module.exports = class QueryFunctions {
 
   filter() {
     const queryObj = { ...this.queryString };
-
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
-
     excludedFields.forEach(field => delete queryObj[field]);
-
     let queryString = JSON.stringify(queryObj);
-
     queryString = queryString.replace(/\b(gte?|lte?)\b/g, op => `$${op}`);
-
     const queryObjRebuild = JSON.parse(queryString);
 
     if (queryObj.name) {
@@ -30,7 +25,6 @@ module.exports = class QueryFunctions {
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.replaceAll(',', ' ');
-
       this.query.sort(sortBy);
     } else {
       this.query.sort('name');
@@ -42,7 +36,6 @@ module.exports = class QueryFunctions {
   limitFields() {
     if (this.queryString.fields) {
       const fields = this.queryString.fields.replaceAll(',', ' ');
-
       this.query.select(fields);
     } else {
       this.query.select('-__v');
@@ -53,13 +46,9 @@ module.exports = class QueryFunctions {
 
   paginate() {
     const page = +this.queryString.page || 1;
-
     const resultsPerPage = +this.queryString.limit || 50;
-
     const skip = (page - 1) * resultsPerPage;
-
     this.query.skip(skip).limit(resultsPerPage);
-
     return this;
   }
 };
