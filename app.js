@@ -19,7 +19,11 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://vesearch.netlify.app/',
+  })
+);
 
 app.options('*', cors());
 
