@@ -22,6 +22,7 @@ const app = express();
 app.use(
   cors({
     origin: 'https://vesearch.netlify.app',
+    credentials: true,
   })
 );
 
