@@ -23,7 +23,6 @@ app.use(
   cors({
     origin: ['https://vesearch.netlify.app', 'http://localhost:3000'],
     credentials: true,
-    exposedHeaders: 'Set-Cookie',
   })
 );
 
