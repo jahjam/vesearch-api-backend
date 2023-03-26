@@ -23,7 +23,7 @@ app.enable('trust proxy');
 
 app.use(
   cors({
-    origin: ['https://vesearch.netlify.app', 'http://localhost:3000'],
+    origin: ['https://vesearch-app.onrender.com', 'http://localhost:3000'],
     credentials: true,
   })
 );
