@@ -14,6 +14,6 @@ router.route('/ratingsAverage/:recipeId').get(ratingsAverage);
 router
   .route('/')
   .post(protect, addReview)
-  .get(protect, restrictTo('admin'), getAllReviews);
+  .get(protect, restrictTo('user', 'admin'), getAllReviews);
 
 module.exports = router;
