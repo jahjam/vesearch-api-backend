@@ -19,6 +19,8 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
+app.enable('trust proxy');
+
 app.use(
   cors({
     origin: ['https://vesearch.netlify.app', 'http://localhost:3000'],
@@ -27,8 +29,6 @@ app.use(
 );
 
 app.options('*', cors());
-
-app.set('trust proxy', true);
 
 app.use(
   helmet({
