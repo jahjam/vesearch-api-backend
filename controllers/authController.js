@@ -23,7 +23,6 @@ const createAndSendJWT = (user, statusCode, req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    domain: process.env.RENDER_EXTERNAL_HOSTNAME,
   };
 
   user.password = undefined;

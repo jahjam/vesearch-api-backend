@@ -19,8 +19,6 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
-app.set('trust proxy', 1);
-
 app.use(
   cors({
     origin: ['https://vesearch-app.onrender.com', 'http://localhost:3000'],
