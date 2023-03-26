@@ -2,21 +2,8 @@
 <html lang="en">
   <head>
     <style>
-      *,
-      *::after,
-      *::before {
-        padding: 0;
-        margin: 0;
-        box-sizing: inherit;
-      }
-
       html {
         font-size: 62.5%;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'bookmania', serif;
       }
 
       .container {
@@ -27,14 +14,12 @@
       .footer {
         display: table;
         margin: 0 auto;
-        width: 60%;
+        width: 40rem;
         height: 8rem;
-        background-color: #58b15a;
       }
 
       h1 {
         font-size: 2.4rem;
-        padding-bottom: 1rem;
       }
 
       h2 {
@@ -48,15 +33,11 @@
 
       .main {
         margin: 0 auto;
-        padding: 2.4rem;
-        width: 60%;
-        height: 100%;
-        background-color: #d2dad2;
+        width: 40rem;
       }
 
       .main-body {
         text-align: center;
-        height: 100%;
       }
 
       .main-body-para {
@@ -90,18 +71,13 @@
       .footer span {
         position: absolute;
         margin-left: 7rem;
-        bottom: 2rem;
       }
 
-      .button-link,
-      .button-link:link,
-      .button-link:active {
+      .button-link {
         color: #58b15a;
       }
 
-      .footer-link,
-      .footer-link:link,
-      .footer-link:active {
+      .footer-link {
         position: absolute;
         margin-left: 7rem;
         bottom: 2rem;
@@ -111,12 +87,9 @@
         text-decoration: underline;
       }
 
-      .footer-link,
-      .footer-link:hover,
-      .footer-link:visited {
+      .footer-link {
         position: absolute;
         margin-left: 7rem;
-        bottom: 2rem;
 
         font-size: 1rem;
         color: #d2dad2;
@@ -139,9 +112,7 @@
         cursor: pointer;
       }
 
-      a,
-      a:link,
-      a:active {
+      a {
         text-decoration: none;
         font-size: 1.6rem;
       }
@@ -153,10 +124,14 @@
 
     <title>${this.options.subject}</title>
   </head>
-  <body>
+  <div>
     <div class="container">
       <header class="header">
-        <img class="img-header" src="./imgs/vesearch-logo.png" height="120px" />
+        <img
+          class="img-header"
+          src="../../../public/emailImgs/vesearch-logo.png"
+          height="120px"
+        />
       </header>
 
       <main class="main">
@@ -175,17 +150,17 @@
           </p>
           <img
             class="leaf-icon"
-            src="./imgs/leaf-icon.svg"
+            src="../../../public/emailImgs/leaf-icon.svg"
             alt="leaf icon svg"
           />
           <img
             class="leaf-icon"
-            src="./imgs/leaf-icon.svg"
+            src="../../../public/emailImgs/leaf-icon.svg"
             alt="leaf icon svg"
           />
           <img
             class="leaf-icon"
-            src="./imgs/leaf-icon.svg"
+            src="../../../public/emailImgs/leaf-icon.svg"
             alt="leaf icon svg"
           />
           <p class="main-body-para">
@@ -201,11 +176,15 @@
       </main>
 
       <footer class="footer">
-        <img class="img-footer" src="./imgs/vesearch-logo.png" height="100px" />
+        <img
+          class="img-footer"
+          src="../../../public/emailImgs/vesearch-logo.png"
+          height="100px"
+        />
         <a class="footer-link" href="https://www.jameskevinwoodruff.com"
           >By Atomic Mammoth Media</a
         >
       </footer>
     </div>
-  </body>
+  </div>
 </html>

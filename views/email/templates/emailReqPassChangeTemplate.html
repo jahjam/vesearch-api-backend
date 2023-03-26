@@ -6,21 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
-      *,
-      *::after,
-      *::before {
-        padding: 0;
-        margin: 0;
-        box-sizing: inherit;
-      }
-
       html {
         font-size: 62.5%;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'bookmania', serif;
       }
 
       .container {
@@ -31,14 +18,12 @@
       .footer {
         display: table;
         margin: 0 auto;
-        width: 60%;
+        width: 40rem;
         height: 8rem;
-        background-color: #58b15a;
       }
 
       h1 {
-        font-size: 3rem;
-        padding-bottom: 1rem;
+        font-size: 2.4rem;
       }
 
       h2 {
@@ -52,18 +37,16 @@
 
       .main {
         margin: 0 auto;
-        padding: 2.4rem;
-        width: 60%;
-        height: 100%;
-        background-color: #d2dad2;
+        width: 40rem;
       }
 
       .main-body {
         text-align: center;
-        height: 100%;
       }
 
       .main-body-para {
+        margin: 0 auto;
+        width: 80%;
         font-size: 1.8rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
@@ -92,18 +75,13 @@
       .footer span {
         position: absolute;
         margin-left: 7rem;
-        bottom: 2rem;
       }
 
-      .button-link,
-      .button-link:link,
-      .button-link:active {
+      .button-link {
         color: #58b15a;
       }
 
-      .footer-link,
-      .footer-link:link,
-      .footer-link:active {
+      .footer-link {
         position: absolute;
         margin-left: 7rem;
         bottom: 2rem;
@@ -113,15 +91,17 @@
         text-decoration: underline;
       }
 
-      .footer-link,
-      .footer-link:hover,
-      .footer-link:visited {
+      .footer-link {
         position: absolute;
         margin-left: 7rem;
-        bottom: 2rem;
 
         font-size: 1rem;
         color: #d2dad2;
+      }
+
+      .leaf-icon {
+        width: 20px;
+        color: #58b15a;
       }
 
       button {
@@ -130,14 +110,13 @@
         padding: 1rem 3rem 1rem 3rem;
         border: none;
         background-color: black;
+
         font-family: inherit;
 
         cursor: pointer;
       }
 
-      a,
-      a:link,
-      a:active {
+      a {
         text-decoration: none;
         font-size: 1.6rem;
       }
