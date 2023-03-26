@@ -23,7 +23,7 @@ const createAndSendJWT = (user, statusCode, req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    domain: 'vesearch-api.onrender.com',
+    domain: 'vesearch-app.onrender.com',
   };
 
   user.password = undefined;
