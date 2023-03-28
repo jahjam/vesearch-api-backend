@@ -4,117 +4,25 @@
     <style>
       html {
         font-size: 62.5%;
-      }
-
-      .container {
-        width: 100%;
-      }
-
-      .header,
-      .footer {
-        display: table;
-        margin: 0 auto;
-        width: 40rem;
-        height: 8rem;
-      }
-
-      h1 {
-        font-size: 2.4rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      .title {
-        text-align: center;
-        padding-top: 2rem;
-      }
-
-      .main {
-        margin: 0 auto;
-        width: 40rem;
-      }
-
-      .main-body {
-        text-align: center;
-      }
-
-      .main-body-para {
-        margin: 0 auto;
-        width: 80%;
-        font-size: 1.8rem;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-      }
-
-      .foooter-title {
-        text-align: left;
-        padding: 2rem;
-      }
-
-      .img-header {
-        display: block;
-        margin: 0 auto;
-      }
-
-      .footer {
-        position: relative;
-        height: 12rem;
-      }
-
-      .img-footer {
-        display: block;
-        margin-left: 4rem;
-      }
-
-      .footer span {
-        position: absolute;
-        margin-left: 7rem;
-      }
-
-      .button-link {
-        color: #58b15a;
-      }
-
-      .footer-link {
-        position: absolute;
-        margin-left: 7rem;
-        bottom: 2rem;
-
-        font-size: 1rem;
-        color: rgb(0, 0, 0);
-        text-decoration: underline;
-      }
-
-      .footer-link {
-        position: absolute;
-        margin-left: 7rem;
-
-        font-size: 1rem;
-        color: #d2dad2;
-      }
-
-      .leaf-icon {
-        width: 20px;
-        color: #58b15a;
-      }
-
-      button {
-        height: 5rem;
-        width: 18rem;
-        padding: 1rem 3rem 1rem 3rem;
-        border: none;
-        background-color: black;
-
-        font-family: inherit;
-
-        cursor: pointer;
+        color: black;
+        width: 50%;
+        font-family: Georgia, 'Times New Roman', Times, serif;
       }
 
       a {
+        font-family: inherit;
+        color: black;
         text-decoration: none;
-        font-size: 1.6rem;
+      }
+
+      p {
+        font-size: 1.4rem;
+      }
+
+      button {
+        padding: 1rem;
+        background: #58b15a;
+        border: none;
       }
     </style>
 
@@ -125,36 +33,18 @@
     <title>${this.options.subject}</title>
   </head>
   <body>
-    <div class="container">
-      <header class="header">
-        <img class="img-header" src="./imgs/vesearch-logo.png" height="120px" />
-      </header>
-
-      <main class="main">
-        <div class="main-body">
+    <div>
+      <div>
+        <div>
           <h1>Hey, ${this.options.username}! 👋</h1>
-          <p class="main-body-para">
+          <p>
             Welcome to VESearch!
             <br />
             <br />
             Below you'll find a bit of information about this web app:
           </p>
-          <img
-            class="leaf-icon"
-            src="./imgs/leaf-icon.svg"
-            alt="leaf icon svg"
-          />
-          <img
-            class="leaf-icon"
-            src="./imgs/leaf-icon.svg"
-            alt="leaf icon svg"
-          />
-          <img
-            class="leaf-icon"
-            src="./imgs/leaf-icon.svg"
-            alt="leaf icon svg"
-          />
-          <p class="main-body-para">
+
+          <p>
             This vegan recipe search engine web application was built by James
             Kevin Woodruff as part of a learning process. He built the backend
             API using Node.js and the frontend using React.js in an attempt to
@@ -162,18 +52,11 @@
             the edges. Please report any issues you find with the app to
             soygazer(at)gmail.com.
           </p>
-          <button class="main-body-link">
-            <a class="button-link" href="${url}">Try VESearch</a>
+          <button>
+            <a href="${this.options.url}">Try VESearch</a>
           </button>
         </div>
-      </main>
-
-      <footer class="footer">
-        <img class="img-footer" src="./imgs/vesearch-logo.png" height="100px" />
-        <a class="footer-link" href="https://www.jameskevinwoodruff.com"
-          >By Atomic Mammoth Media</a
-        >
-      </footer>
+      </div>
     </div>
   </body>
 </html>
