@@ -216,9 +216,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    const resetURL = `${req.protocol}://${req.get(
-      'origin'
-    )}/new-password/${resetToken}`;
+    const resetURL = `${req.get('origin')}/new-password/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordResetLink();
 
