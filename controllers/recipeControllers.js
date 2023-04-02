@@ -120,6 +120,7 @@ exports.addRecipe = catchAsync(async (req, res, next) => {
       )
     );
 
+  req.body.dietTags = JSON.parse(req.body.dietTags);
   req.body.nutrition = JSON.parse(req.body.nutrition);
   req.body.ingredients = JSON.parse(req.body.ingredients);
   req.body.methods = JSON.parse(req.body.methods);
