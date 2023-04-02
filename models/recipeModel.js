@@ -48,7 +48,7 @@ const recipeSchema = new mongoose.Schema(
           'novice',
           'beginner',
           'competent',
-          'prodicient',
+          'proficient',
           'master chef',
         ],
         message:
