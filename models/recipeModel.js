@@ -338,9 +338,8 @@ recipeSchema.pre('save', function (next) {
   next();
 });
 
-// populate all queries that begin with 'find'
 recipeSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'author', select: 'username photo' });
+  this.populate({ path: 'author', select: 'username' });
   next();
 });
 
