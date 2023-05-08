@@ -95,7 +95,6 @@ schedule.scheduleJob('* * */24 * *', async () => {
 
 app.use('/public', express.static(`${__dirname}/public`));
 
-// app generic routes
 app.use(`/api/v${process.env.API_VERSION}/recipes`, recipeRoute);
 app.use(`/api/v${process.env.API_VERSION}/users`, userRoute);
 app.use(`/api/v${process.env.API_VERSION}/reviews`, reviewRoute);
