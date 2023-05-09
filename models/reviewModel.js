@@ -28,6 +28,11 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
+reviewSchema.pre(/^create/, function (next) {
+  this.populate({ path: 'author', select: 'username photo -_id' });
+  next();
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
