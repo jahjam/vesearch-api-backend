@@ -22,16 +22,17 @@ const reviewSchema = new mongoose.Schema({
   },
   date: Date,
 });
-// populate all queries that begin with 'find'
-reviewSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'author', select: 'username photo -_id' });
-  next();
-});
 
-reviewSchema.pre('create', function (next) {
-  this.populate({ path: 'author', select: 'username photo -_id' });
-  next();
-});
+// populate all queries that begin with 'find'
+reviewSchema
+  .pre(/^find/, function (next) {
+    this.populate({ path: 'author', select: 'username photo -_id' });
+    next();
+  })
+  .pre('create', function (next) {
+    this.populate({ path: 'author', select: 'username photo -_id' });
+    next();
+  });
 
 const Review = mongoose.model('Review', reviewSchema);
 
