@@ -24,7 +24,7 @@ const reviewSchema = new mongoose.Schema({
 });
 // populate all queries that begin with 'find'
 reviewSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'author', select: 'username -_id' });
+  this.populate({ path: 'author', select: 'username photo -_id' });
   next();
 });
 
