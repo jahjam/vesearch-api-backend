@@ -28,7 +28,7 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
-reviewSchema.pre(/^create/, function (next) {
+reviewSchema.pre('create', function (next) {
   this.populate({ path: 'author', select: 'username photo -_id' });
   next();
 });
