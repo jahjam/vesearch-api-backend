@@ -16,7 +16,8 @@ exports.uploadUserPhoto = upload.single('photo');
 exports.resizeUserPhoto = (req, res, next) => {
   if (!req.file) return next();
 
-  req.file.filename = `user-${req.user.id}.jpeg`;
+  // req.file.filename = `user-${req.user.id}.jpeg`;
+  req.file.filename = `default.jpeg`;
 
   sharp(req.file.buffer)
     .resize(500, 500)
