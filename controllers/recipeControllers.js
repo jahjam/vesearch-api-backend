@@ -22,7 +22,7 @@ exports.resizeRecipePhoto = (req, res, next) => {
     .resize(1000, 1000)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/recipes/${req.file.filename}`);
+    .toFile(`public/imgs/${req.file.filename}`);
 
   next();
 };
