@@ -332,7 +332,6 @@ recipeSchema.virtual('reviews', {
   localField: '_id',
 });
 
-// generate a slug on the schema for use in the browser
 recipeSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
@@ -343,7 +342,6 @@ recipeSchema.pre(/^find/, function (next) {
   next();
 });
 
-// populate all queries that begin with 'find'
 recipeSchema.pre(/^find/, function (next) {
   this.populate({ path: 'reviews', select: 'rating comment author' });
   next();
