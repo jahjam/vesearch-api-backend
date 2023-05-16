@@ -16,7 +16,6 @@ exports.addReview = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       review,
-      user: req.user,
     },
   });
 });
