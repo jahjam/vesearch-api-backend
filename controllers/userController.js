@@ -6,6 +6,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const { multerFilter } = require('../utils/multerFilter');
 const Email = require('../utils/email');
+const {imageUpload} = require("../utils/imgUpload");
 
 const multerStorage = multer.memoryStorage();
 
@@ -13,19 +14,13 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
 exports.uploadUserPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = (req, res, next) => {
+exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  req.file.filename = `user-${req.user.id}.jpeg`;
-
-  sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat('jpeg')
-    .jpeg({ quality: 80 })
-    .toFile(`${__dirname}/../public/imgs/${req.file.filename}`);
+  req.file.filename = await imageUpload(req.file.buffer, `user-${req.body.name.replaceAll(" ", "-")}`);
 
   next();
-};
+});
 
 exports.getMe = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id)
