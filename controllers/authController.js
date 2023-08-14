@@ -225,7 +225,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       message: `A password reset link was sent to ${user.email}`,
     });
   } catch (err) {
-    // if there is an error sending the email (within the email provider etc), reset token as it is unnecassary to have unusable tokens in the database
+    // if there is an error sending the email (within the email provider etc.), reset token as it is unnecessary to have unusable tokens in the database
     user.passwordResetToken = undefined;
     user.passwordResetExpiryDate = undefined;
     await user.save({ validateBeforeSave: false });
