@@ -20,8 +20,8 @@ exports.imageUpload = async (file, fileName) => {
     const streamUpload = () => {
         return new Promise((resolve, reject) => {
             const res = cloudinary.uploader.upload_stream({
-                resource_type: 'image',
-                folder: "recipe-images",
+                resource_type: fileName.startsWith("recipe") ? 'image' : 'avatar',
+                folder: fileName.startsWith("recipe") ? "recipe-images" : "avatar-images",
                 public_id: fileName,
                 overwrite: true,
             }, (error, result) => {
